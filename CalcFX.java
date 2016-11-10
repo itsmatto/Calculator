@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 public class CalcFX extends Application
 {
   TextField txtnum1, txtnum2;
-  Button btnadd, btnsub, btndiv, btnmul, btnmod, btnexp, btnclear;
+  Button btnadd, btnsub, btndiv, btnmul, btnmod, btnexp, btnfac, btnsqr, btnclear;
   Label lblanswer;
 
   @Override
@@ -28,6 +28,8 @@ public class CalcFX extends Application
     btndiv    = new Button("/");
     btnmod    = new Button("%");
     btnexp    = new Button("^");
+    btnfac    = new Button("x!");
+    btnsqr    = new Button("sqrt");
     btnclear  = new Button("Clear");
     lblanswer = new Label("?");
 
@@ -51,17 +53,19 @@ public class CalcFX extends Application
     root.add(btndiv,  1,1);
     root.add(btnmod,  0,2);
     root.add(btnexp,  1,2);
-    root.add(txtnum1, 0,3);
-    root.add(txtnum2, 1,3);
+    root.add(btnfac,  0,3);
+    root.add(btnsqr,  1,3);
+    root.add(txtnum1, 0,4);
+    root.add(txtnum2, 1,4);
 
-    root.add(lblanswer, 0, 4, 2, 1);
-    root.add(btnclear, 0, 5, 2, 1);
+    root.add(lblanswer, 0, 5, 2, 1);
+    root.add(btnclear, 0, 6, 2, 1);
     //set widths of all controls in method
     setWidths();
     //attach buttons to code in method
     linkButtonFunctions();
     //usual stuff for apps
-    Scene scene = new Scene(root, 300, 300);
+    Scene scene = new Scene(root, 300, 500);
     theStage.setTitle("Mathemagic 2.0");
     theStage.setScene(scene);
     theStage.show();
@@ -77,26 +81,31 @@ public class CalcFX extends Application
       btndiv.setPrefWidth(70);
       btnmod.setPrefWidth(70);
       btnexp.setPrefWidth(70);
+      btnfac.setPrefWidth(70);
+      btnsqr.setPrefWidth(70);
       btnclear.setPrefWidth(150);
       lblanswer.setPrefWidth(150);
     }
     public void linkButtonFunctions()
     {
       //have each button run buttonFunctions when clicked
-      btnadd.setOnAction(e -> buttonFunctions(e));
-      btnsub.setOnAction(e -> buttonFunctions(e));
-      btnmul.setOnAction(e -> buttonFunctions(e));
-      btndiv.setOnAction(e -> buttonFunctions(e));
-      btnmod.setOnAction(e -> buttonFunctions(e));
-      btnexp.setOnAction(e -> buttonFunctions(e));
-      btnclear.setOnAction(e -> buttonFunctions(e));
+      btnadd.setOnAction(e    -> buttonFunctions(e));
+      btnsub.setOnAction(e    -> buttonFunctions(e));
+      btnmul.setOnAction(e    -> buttonFunctions(e));
+      btndiv.setOnAction(e    -> buttonFunctions(e));
+      btnmod.setOnAction(e    -> buttonFunctions(e));
+      btnexp.setOnAction(e    -> buttonFunctions(e));
+      btnfac.setOnAction(e    -> buttonFunctions(e));
+      btnsqr.setOnAction(e    -> buttonFunctions(e));
+      btnclear.setOnAction(e  -> buttonFunctions(e));
     }
 
     public void buttonFunctions(ActionEvent e)
     {
       Double num1, num2, answer;
-      char symbol;
+      String symbol;
       //e tells us which button was clicked "Event"
+
       if(e.getSource() == btnclear)
       {
         txtnum1.setText("");
@@ -110,32 +119,47 @@ public class CalcFX extends Application
       num2 = Double.parseDouble(txtnum2.getText());
       if(e.getSource() == btnadd)
       {
-        symbol = '+';
+        symbol = "+";
         answer = num1 + num2;
       }
       else if(e.getSource() == btnsub)
       {
-        symbol = '-';
+        symbol = "-";
         answer = num1 - num2;
       }
       else if(e.getSource() == btnmul)
       {
-        symbol = 'x';
+        symbol = "x";
         answer = num1 * num2;
       }
       else if(e.getSource() == btnmod)
       {
-        symbol = '%';
+        symbol = "%";
         answer = num1 % num2;
       }
       else if(e.getSource() == btnexp)
       {
-        symbol = '^';
+        symbol = "^";
         answer = Math.pow(num1,num2);
+      }
+      else if(e.getSource() == btnfac)
+      {
+        symbol      = "!";
+        answer      = Double.parseDouble(txtnum1.getText());
+        int count   = Integer.parseInt(txtnum1.getText());
+        for(int i = 1; i < count; i++) {
+          answer = answer * i;
+        }
+        num2 = 0.0;
+      }
+      else if(e.getSource() == btnsqr)
+      {
+        symbol = "sqrt";
+        answer = Math.sqrt(num1);
       }
       else
       {
-        symbol = '/';
+        symbol = "/";
         answer = num1 / num2;
       }
       //display answer
