@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 public class CalcFX extends Application
 {
   TextField txtnum1, txtnum2;
-  Button btnadd, btnsub, btndiv, btnmul, btnmod, btnexp, btnfac, btnsqr, btnclear;
+  Button btnadd, btnsub, btndiv, btnmul, btnmod, btnexp, btnfac, btnsqr, btnsin, btncos, btntan, btnclear;
   Label lblanswer;
 
   @Override
@@ -30,8 +30,15 @@ public class CalcFX extends Application
     btnexp    = new Button("^");
     btnfac    = new Button("x!");
     btnsqr    = new Button("sqrt");
+    btnsin    = new Button("sin");
+    btncos    = new Button("cos");
+    btntan    = new Button("tan");
     btnclear  = new Button("Clear");
     lblanswer = new Label("?");
+
+    //Clear 'em
+    txtnum1.setText("0");
+    txtnum2.setText("0");
 
     //center text in Label
     lblanswer.setAlignment(Pos.CENTER);
@@ -55,11 +62,14 @@ public class CalcFX extends Application
     root.add(btnexp,  1,2);
     root.add(btnfac,  0,3);
     root.add(btnsqr,  1,3);
-    root.add(txtnum1, 0,4);
-    root.add(txtnum2, 1,4);
+    root.add(btnsin,  0,4);
+    root.add(btncos,  1,4);
+    root.add(btntan,  0,5);
+    root.add(txtnum1, 0,6);
+    root.add(txtnum2, 1,6);
 
-    root.add(lblanswer, 0, 5, 2, 1);
-    root.add(btnclear, 0, 6, 2, 1);
+    root.add(lblanswer, 0, 7, 2, 1);
+    root.add(btnclear, 0, 8, 2, 1);
     //set widths of all controls in method
     setWidths();
     //attach buttons to code in method
@@ -83,6 +93,9 @@ public class CalcFX extends Application
       btnexp.setPrefWidth(70);
       btnfac.setPrefWidth(70);
       btnsqr.setPrefWidth(70);
+      btnsin.setPrefWidth(70);
+      btncos.setPrefWidth(70);
+      btntan.setPrefWidth(70);
       btnclear.setPrefWidth(150);
       lblanswer.setPrefWidth(150);
     }
@@ -97,6 +110,9 @@ public class CalcFX extends Application
       btnexp.setOnAction(e    -> buttonFunctions(e));
       btnfac.setOnAction(e    -> buttonFunctions(e));
       btnsqr.setOnAction(e    -> buttonFunctions(e));
+      btnsin.setOnAction(e    -> buttonFunctions(e));
+      btncos.setOnAction(e    -> buttonFunctions(e));
+      btntan.setOnAction(e    -> buttonFunctions(e));
       btnclear.setOnAction(e  -> buttonFunctions(e));
     }
 
@@ -108,8 +124,8 @@ public class CalcFX extends Application
 
       if(e.getSource() == btnclear)
       {
-        txtnum1.setText("");
-        txtnum2.setText("");
+        txtnum1.setText("0");
+        txtnum2.setText("0");
         lblanswer.setText("?");
         txtnum1.requestFocus();
         return;
@@ -121,21 +137,25 @@ public class CalcFX extends Application
       {
         symbol = "+";
         answer = num1 + num2;
+        lblanswer.setText("" + num1 + symbol + num2 + " = " + answer);
       }
       else if(e.getSource() == btnsub)
       {
         symbol = "-";
         answer = num1 - num2;
+        lblanswer.setText("" + num1 + symbol + num2 + " = " + answer);
       }
       else if(e.getSource() == btnmul)
       {
         symbol = "x";
         answer = num1 * num2;
+        lblanswer.setText("" + num1 + symbol + num2 + " = " + answer);
       }
       else if(e.getSource() == btnmod)
       {
         symbol = "%";
         answer = num1 % num2;
+        lblanswer.setText("" + num1 + symbol + num2 + " = " + answer);
       }
       else if(e.getSource() == btnexp)
       {
@@ -151,19 +171,41 @@ public class CalcFX extends Application
           answer = answer * i;
         }
         num2 = 0.0;
+        lblanswer.setText(num1 + "! = " + answer);
       }
       else if(e.getSource() == btnsqr)
       {
         symbol = "sqrt";
         answer = Math.sqrt(num1);
+        lblanswer.setText("sqrt(" + num1 + ") = " + answer);
+      }
+      else if(e.getSource() == btnsin)
+      {
+        symbol = "sin";
+        answer = Math.sin(num1);
+        lblanswer.setText("sin(" + num1 + ") = " + answer);
+      }
+      else if(e.getSource() == btncos)
+      {
+        symbol = "cos";
+        answer = Math.cos(num1);
+        lblanswer.setText("cos(" + num1 + ") = " + answer);
+      }
+      else if(e.getSource() == btntan)
+      {
+        symbol = "tan";
+        answer = Math.tan(num1);
+        lblanswer.setText("tan(" + num1 + ") = " + answer);
       }
       else
       {
         symbol = "/";
         answer = num1 / num2;
+        lblanswer.setText("" + num1 + symbol + num2 + " = " + answer);
       }
+
       //display answer
-      lblanswer.setText("" + num1 + symbol + num2 + " = " + answer);
+      //lblanswer.setText("" + num1 + symbol + num2 + " = " + answer);
 
     }
     public static void main(String[] args) {
