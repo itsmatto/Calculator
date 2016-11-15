@@ -44,7 +44,20 @@ public class CalcFX extends Application
     lblanswer.setAlignment(Pos.CENTER);
     //apply css-like style to Label
 
-    lblanswer.setStyle("-fx-border-color: #000; -fx-padding: 5px;");
+    lblanswer.setStyle("-fx-border-color: #bbbcbd; -fx-padding: 5px; -fx-background-color:#D0D1D3;");
+
+    btnadd.setStyle("   -fx-border-color: #bbbcbd; -fx-padding: 5px; -fx-background-color:#D0D1D3;");
+    btnsub.setStyle("   -fx-border-color: #bbbcbd; -fx-padding: 5px; -fx-background-color:#D0D1D3;");
+    btnmul.setStyle("   -fx-border-color: #bbbcbd; -fx-padding: 5px; -fx-background-color:#D0D1D3;");
+    btndiv.setStyle("   -fx-border-color: #bbbcbd; -fx-padding: 5px; -fx-background-color:#D0D1D3;");
+    btnmod.setStyle("   -fx-border-color: #bbbcbd; -fx-padding: 5px; -fx-background-color:#D0D1D3;");
+    btnexp.setStyle("   -fx-border-color: #bbbcbd; -fx-padding: 5px; -fx-background-color:#D0D1D3;");
+    btnfac.setStyle("   -fx-border-color: #bbbcbd; -fx-padding: 5px; -fx-background-color:#D0D1D3;");
+    btnsqr.setStyle("   -fx-border-color: #bbbcbd; -fx-padding: 5px; -fx-background-color:#D0D1D3;");
+    btnsin.setStyle("   -fx-border-color: #bbbcbd; -fx-padding: 5px; -fx-background-color:#D0D1D3;");
+    btncos.setStyle("   -fx-border-color: #bbbcbd; -fx-padding: 5px; -fx-background-color:#D0D1D3;");
+    btntan.setStyle("   -fx-border-color: #bbbcbd; -fx-padding: 5px; -fx-background-color:#D0D1D3;");
+    btnclear.setStyle(" -fx-border-color: #0a71e5; -fx-padding: 5px; -fx-background-color:#0c7eff; -fx-fill: #ffffff;");
 
     //make container for app
     GridPane root = new GridPane();
@@ -54,28 +67,45 @@ public class CalcFX extends Application
     root.setHgap(10);
     root.setVgap(10);
     //add to grid, cell by cell
-    root.add(btnadd,  0,0);
-    root.add(btnsub,  1,0);
-    root.add(btnmul,  0,1);
-    root.add(btndiv,  1,1);
-    root.add(btnmod,  0,2);
-    root.add(btnexp,  1,2);
-    root.add(btnfac,  0,3);
-    root.add(btnsqr,  1,3);
-    root.add(btnsin,  0,4);
-    root.add(btncos,  1,4);
-    root.add(btntan,  0,5);
-    root.add(txtnum1, 0,6);
-    root.add(txtnum2, 1,6);
+    //root.add(btnadd,  0,0);
+    //root.add(btnsub,  1,0);
+    //root.add(btnmul,  0,1);
+    //root.add(btndiv,  1,1);
+    //root.add(btnmod,  0,2);
+    //root.add(btnexp,  1,2);
+    //root.add(btnfac,  0,3);
+    //root.add(btnsqr,  1,3);
+    //root.add(btnsin,  0,4);
+    //root.add(btncos,  1,4);
+    //root.add(btntan,  0,5);
+    //root.add(txtnum1, 0,6);
+    //root.add(txtnum2, 1,6);
 
-    root.add(lblanswer, 0, 7, 2, 1);
-    root.add(btnclear, 0, 8, 2, 1);
+    root.add(btnsin,  0,1);
+    root.add(btncos,  0,2);
+    root.add(btntan,  0,3);
+    root.add(btnclear,0,4);
+
+    root.add(btnmod,  1,1);
+    root.add(btnexp,  1,2);
+    root.add(btnfac,  1,3);
+    root.add(btnsqr,  1,4);
+
+    root.add(btnadd,  2,1);
+    root.add(btnsub,  2,2);
+    root.add(btnmul,  2,3);
+    root.add(btndiv,  2,4);
+
+    root.add(txtnum1, 0,0);
+    root.add(txtnum2, 1,0);
+
+    root.add(lblanswer, 0, 5, 4, 1);
     //set widths of all controls in method
     setWidths();
     //attach buttons to code in method
     linkButtonFunctions();
     //usual stuff for apps
-    Scene scene = new Scene(root, 300, 500);
+    Scene scene = new Scene(root, 350, 350);
     theStage.setTitle("Mathemagic 2.0");
     theStage.setScene(scene);
     theStage.show();
@@ -96,8 +126,8 @@ public class CalcFX extends Application
       btnsin.setPrefWidth(70);
       btncos.setPrefWidth(70);
       btntan.setPrefWidth(70);
-      btnclear.setPrefWidth(150);
-      lblanswer.setPrefWidth(150);
+      btnclear.setPrefWidth(70);
+      lblanswer.setPrefWidth(230);
     }
     public void linkButtonFunctions()
     {
